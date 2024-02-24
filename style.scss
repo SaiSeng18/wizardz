@@ -1,0 +1,731 @@
+$layout-breakpoint-small: 480px;
+$layout-breakpoint-medium: 767px;
+$layout-breakpoint-large: 1279px;
+$layout-breakpoint-extra-large: 1430px;
+
+$radius: calc(2vw + 10px);
+
+:root {
+	--primary-color: #ffffff;
+	--secondary-color: #1f1f1f;
+	--ascent-color: #bbfa7f;
+	--gray: #f3f3f3;
+}
+
+.dark-theme {
+	--primary-color: #1f1f1f;
+	--secondary-color: #ffffff;
+	--ascent-color: #bbfa7f;
+	--gray: #f3f3f3;
+}
+
+body,
+html,
+:root {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: "Ubuntu Mono", monospace;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+main {
+	background-color: var(--primary-color);
+	padding: 20px 50px;
+	display: flex;
+	flex-direction: column;
+
+	@media screen and (max-width: $layout-breakpoint-large) {
+		padding: 20px;
+	}
+}
+
+header {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	nav {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+
+		@media screen and (max-width: $layout-breakpoint-large) {
+			gap: 20px;
+		}
+
+		ul {
+			display: flex;
+			align-items: center;
+			gap: 40px;
+			list-style-type: none;
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				gap: 20px;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-medium) {
+				display: none;
+			}
+
+			li a {
+				text-decoration: none;
+				color: var(--secondary-color);
+				font-size: 1.25rem;
+				font-weight: 700;
+				text-wrap: nowrap;
+
+				// @media screen and (max-width: $layout-breakpoint-large) {
+				// 	font-size: 1rem;
+				// }
+			}
+		}
+
+		.menu {
+			display: none;
+			height: 35px;
+			width: 35px;
+			cursor: pointer;
+			color: var(--secondary-color);
+
+			@media screen and (max-width: $layout-breakpoint-medium) {
+				display: block;
+			}
+		}
+
+		.theme {
+			height: 35px;
+			width: 35px;
+			color: var(--secondary-color);
+			cursor: pointer;
+		}
+	}
+}
+
+.nav-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--primary-color);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+	transform: translateX(-100%);
+	transition: all 0.3s ease-in-out;
+
+	@media screen and (max-width: $layout-breakpoint-medium) {
+		display: flex;
+	}
+
+	svg {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		height: 35px;
+		width: 35px;
+		color: var(--secondary-color);
+	}
+
+	&.active {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(0);
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		list-style-type: none;
+
+		li a {
+			text-decoration: none;
+			color: var(--secondary-color);
+			font-size: 2rem;
+			font-weight: 700;
+			text-wrap: nowrap;
+		}
+	}
+}
+
+.section-container {
+	padding: 100px 0;
+}
+
+@mixin btn($bg-color, $color, $padding, $radius) {
+	background-color: $bg-color;
+	color: $color;
+	padding: $padding;
+	border: 2px solid $color;
+	border-radius: $radius;
+	cursor: pointer;
+}
+
+.header__button {
+	font-size: 1.25rem;
+	font-weight: 700;
+	text-wrap: nowrap;
+	@include btn(var(--primary-color), var(--secondary-color), 18px 30px, 10px);
+
+	@media screen and (max-width: $layout-breakpoint-large) {
+		display: none;
+	}
+}
+
+.hero__button {
+	font-size: 1rem;
+	text-wrap: nowrap;
+	width: fit-content;
+	@include btn(var(--secondary-color), var(--primary-color), 14px 20px, 10px);
+
+	@media screen and (max-width: $layout-breakpoint-large) {
+	}
+}
+
+.hero-section {
+	width: 100%;
+	padding: 100px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@media screen and (max-width: $layout-breakpoint-medium) {
+		flex-direction: column;
+		gap: 50px;
+	}
+
+	&__left {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+
+		@media screen and (max-width: $layout-breakpoint-large) {
+			gap: 20px;
+		}
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			width: 100%;
+		}
+		@media screen and (max-width: $layout-breakpoint-small) {
+			gap: 10px;
+		}
+
+		h2 {
+			font-size: 4rem;
+			max-width: 600px;
+			color: var(--secondary-color);
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				font-size: 3rem;
+			}
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 2rem;
+			}
+		}
+
+		&__descr {
+			max-width: 400px;
+			font-size: 1.5rem;
+			color: var(--secondary-color);
+			@media screen and (max-width: $layout-breakpoint-large) {
+				font-size: 1.25rem;
+			}
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 1rem;
+			}
+		}
+	}
+
+	&__right {
+		width: 50%;
+
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			width: 100%;
+		}
+
+		img {
+			width: 100%;
+			height: 500px;
+			object-fit: contain;
+
+			@media screen and (max-width: $layout-breakpoint-small) {
+				height: 350px;
+			}
+		}
+	}
+}
+
+.brands {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 50px;
+	margin: 50px 0;
+
+	@media screen and (max-width: $layout-breakpoint-extra-large) {
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+
+	img {
+		height: 50px;
+		object-fit: contain;
+		filter: grayscale(100%);
+
+		@media screen and (max-width: $layout-breakpoint-extra-large) {
+			height: 30px;
+		}
+	}
+}
+
+.service-section {
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		h2 {
+			background-color: var(--ascent-color);
+			padding: 10px;
+			color: var(--secondary-color);
+			font-size: 2.5rem;
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				font-size: 2rem;
+			}
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 1.5rem;
+			}
+		}
+
+		.desc {
+			font-size: 1.25rem;
+			color: var(--secondary-color);
+
+			@media screen and (max-width: $layout-breakpoint-medium) {
+				font-size: 1.15rem;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 1rem;
+			}
+		}
+	}
+
+	&__bento-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 50px;
+		margin-top: 100px;
+
+		@media screen and (max-width: $layout-breakpoint-large) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			grid-template-columns: repeat(1, 1fr);
+			gap: 20px;
+			margin-top: 50px;
+		}
+
+		&__card {
+			border: 2px solid var(--secondary-color);
+			border-radius: $radius;
+			padding: 50px;
+			aspect-ratio: 2 / 1;
+			display: flex;
+			gap: 20px;
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				padding: 20px;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-medium) {
+				&:nth-child(3) {
+					order: 4;
+				}
+				&:nth-child(4) {
+					order: 3;
+				}
+				padding: 30px;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-small) {
+				padding: 20px;
+			}
+
+			&.active {
+				transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+				&:hover {
+					box-shadow: 0px 10px 0px 0px var(--secondary-color);
+					transform: translateY(-10px);
+					transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+				}
+			}
+
+			&.dark {
+				background-color: var(--secondary-color);
+
+				.left {
+					p {
+						span {
+							background-color: var(--primary-color);
+							color: var(--secondary-color);
+						}
+					}
+
+					a {
+						color: var(--primary-color);
+						.icon {
+							background-color: var(--primary-color);
+
+							svg {
+								color: var(--secondary-color);
+							}
+						}
+					}
+				}
+			}
+
+			.left {
+				width: 50%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+
+				p {
+					span {
+						background-color: var(--ascent-color);
+						// padding: 10px;
+						color: var(--secondary-color);
+						font-size: 2.5rem;
+
+						@media screen and (max-width: $layout-breakpoint-extra-large) {
+							font-size: 2rem;
+						}
+
+						@media screen and (max-width: $layout-breakpoint-large) {
+							font-size: 1.75rem;
+						}
+
+						@media screen and (max-width: $layout-breakpoint-small) {
+							font-size: 1.25rem;
+						}
+					}
+				}
+
+				a {
+					display: flex;
+					gap: 20px;
+					align-items: center;
+					width: fit-content;
+					font-size: 2rem;
+					text-wrap: nowrap;
+					color: var(--secondary-color);
+
+					@media screen and (max-width: $layout-breakpoint-extra-large) {
+						font-size: 1.5rem;
+					}
+
+					@media screen and (max-width: $layout-breakpoint-large) {
+						gap: 10px;
+						font-size: 1.25rem;
+					}
+
+					@media screen and (max-width: $layout-breakpoint-small) {
+						font-size: 1rem;
+					}
+
+					.icon {
+						min-width: 75px;
+						min-height: 75px;
+						border-radius: 100%;
+						background-color: var(--secondary-color);
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						padding: 5px;
+
+						@media screen and (max-width: $layout-breakpoint-extra-large) {
+							min-width: 50px;
+							min-height: 50px;
+						}
+
+						@media screen and (max-width: $layout-breakpoint-large) {
+							min-width: 35px;
+							min-height: 35px;
+						}
+
+						@media screen and (max-width: $layout-breakpoint-small) {
+							min-width: 25px;
+							min-height: 25px;
+						}
+
+						svg {
+							width: 100%;
+							height: 100%;
+							color: var(--ascent-color);
+						}
+					}
+				}
+			}
+			.right {
+				width: 50%;
+				height: 100%;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+		}
+	}
+}
+
+.proposal {
+	padding: 80px;
+	background-color: var(--gray);
+	border-radius: $radius;
+	margin: 50px 0;
+	display: flex;
+	gap: 50px;
+
+	@media screen and (max-width: $layout-breakpoint-medium) {
+		flex-direction: column;
+		padding: 50px;
+	}
+
+	@media screen and (max-width: $layout-breakpoint-small) {
+		padding: 30px;
+	}
+
+	.left {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			width: 100%;
+			gap: 20px;
+		}
+
+		.title {
+			font-size: 2.5rem;
+
+			@media screen and (max-width: $layout-breakpoint-extra-large) {
+				font-size: 2rem;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				font-size: 1.75rem;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 1.25rem;
+			}
+		}
+
+		.desc {
+			font-size: 1.75rem;
+			max-width: 600px;
+
+			@media screen and (max-width: $layout-breakpoint-extra-large) {
+				font-size: 1.5rem;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				gap: 10px;
+				font-size: 1.25rem;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 1rem;
+			}
+		}
+
+		button {
+			font-size: 2rem;
+			width: fit-content;
+			@include btn(var(--secondary-color), var(--primary-color), 20px 30px, 10px);
+
+			@media screen and (max-width: $layout-breakpoint-extra-large) {
+				font-size: 1.75rem;
+				@include btn(var(--secondary-color), var(--primary-color), 20px 30px, 10px);
+			}
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				font-size: 1.25rem;
+				@include btn(var(--secondary-color), var(--primary-color), 15px 20px, 10px);
+			}
+			@media screen and (max-width: $layout-breakpoint-large) {
+				font-size: 1rem;
+			}
+		}
+	}
+
+	.right {
+		width: 50%;
+
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			width: 100%;
+		}
+
+		img {
+			width: 100%;
+
+			height: 350px;
+			object-fit: contain;
+		}
+	}
+}
+
+.case-section {
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		h2 {
+			background-color: var(--ascent-color);
+			padding: 10px;
+			color: var(--secondary-color);
+			font-size: 2.5rem;
+
+			@media screen and (max-width: $layout-breakpoint-large) {
+				font-size: 2rem;
+			}
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 1.5rem;
+			}
+		}
+
+		.desc {
+			font-size: 1.25rem;
+			color: var(--secondary-color);
+
+			@media screen and (max-width: $layout-breakpoint-medium) {
+				font-size: 1.15rem;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-small) {
+				font-size: 1rem;
+			}
+		}
+	}
+
+	&__content-container {
+		margin-top: 100px;
+		padding: 80px;
+		background-color: var(--secondary-color);
+		border-radius: $radius;
+		display: flex;
+		justify-content: space-between;
+
+		@media screen and (max-width: $layout-breakpoint-large) {
+			flex-direction: column;
+		}
+
+		@media screen and (max-width: $layout-breakpoint-medium) {
+			padding: 50px;
+			margin-top: 50px;
+		}
+
+		@media screen and (max-width: $layout-breakpoint-small) {
+			padding: 30px;
+		}
+
+		.divider {
+			width: 2px;
+			background-color: var(--primary-color);
+			margin: 0 50px;
+			@media screen and (max-width: $layout-breakpoint-large) {
+				width: 100%;
+				height: 2px;
+				margin: 50px 0;
+			}
+
+			@media screen and (max-width: $layout-breakpoint-medium) {
+				margin: 20px 0;
+			}
+		}
+
+		&__content {
+			flex: 1 1 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: 50px;
+
+			p {
+				font-size: 1.5rem;
+				color: var(--primary-color);
+
+				@media screen and (max-width: $layout-breakpoint-medium) {
+					font-size: 1.25rem;
+				}
+
+				@media screen and (max-width: $layout-breakpoint-small) {
+					font-size: 1rem;
+				}
+			}
+
+			a {
+				display: flex;
+				align-items: center;
+				color: var(--ascent-color);
+				gap: 10px;
+				font-size: 1.25rem;
+
+				@media screen and (max-width: $layout-breakpoint-medium) {
+					font-size: 1rem;
+				}
+
+				@media screen and (max-width: $layout-breakpoint-small) {
+					font-size: 0.75rem;
+				}
+
+				svg {
+					width: 30px;
+					height: 30px;
+				}
+			}
+		}
+	}
+}

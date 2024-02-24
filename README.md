@@ -25,5 +25,5 @@ The styling for this project is done using SCSS, a preprocessor scripting langua
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-![Light Theme](https://i.pinimg.com/564x/8d/7d/a5/8d7da5a6f284b805a5d445c6e42c79db.jpg)
-![Dark Theme](https://i.pinimg.com/564x/8d/7d/a5/8d7da5a6f284b805a5d445c6e42c79db.jpg)
+![Light Theme](https://github.com/SaiSeng18/wizardz/blob/master/src/ss%201.png?raw=true)
+![Dark Theme](https://github.com/SaiSeng18/wizardz/blob/master/src/ss%202.png?raw=true)
